@@ -3,9 +3,12 @@ import "./home.css";
 import Sidebar from "../components/sidebar/Sidebar";
 import Card from "../components/card/Card";
 import Weekview from "../components/weekview/Weekview";
+import { useValue } from "../context/AppContext";
 
 function Home() {
   const [showWeekView, setShowWeekView] = useState(false);
+  const { habitData } = useValue();
+
   return (
     <div className="home-container">
       <h1>Habit tracker</h1>
@@ -27,13 +30,9 @@ function Home() {
             <Weekview />
           ) : (
             <>
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
+              {habitData.map((habit, idx) => (
+                <Card {...habit} key={idx} />
+              ))}
             </>
           )}
         </div>

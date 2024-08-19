@@ -92,7 +92,7 @@
   border-radius: 50%;
   display: block;
 }
-.hideMe .not-done-btn {
+.hideMe.not-done-btn {
   display: none;
 }
 .done-btn {
@@ -100,9 +100,10 @@
   bottom: -16px;
   right: 8px;
   width: 30px;
+  border: 2px solid white;
 }
 
-.hideKordo .done-btn {
+.hideKordo.done-btn {
   display: none;
 }
 

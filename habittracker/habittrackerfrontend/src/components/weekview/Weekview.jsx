@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./weekview.css";
 import { assets } from "../../assets/assets";
+import { useValue } from "../../context/AppContext";
 
 function Weekview() {
-  const weekDays = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  const a = useValue();
+  console.log(a);
   const currentDate =
     new Date().toLocaleDateString("en-US", {
       month: "2-digit",
@@ -22,12 +24,15 @@ function Weekview() {
   // });
 
   const handleNotDoneClick = (e) => {
-    e.target.parentElement.classList.add("hideMe");
+    // console.dir(doneRef.current.classList);
+    // doneRef.current.classList.add("hideKordo");
+    console.dir(e.target.parentElement.children[2].classList.add("hideKordo"));
   };
 
   const handleDoneClick = (e) => {
-    console.log("clicked");
-    // doneRef.current.parentElement.classList.add("hideKordo");
+    // console.dir(notDoneRef.current);
+    // notDoneRef.current.classList.add("hideMe");
+    console.dir(e.target.parentElement.children[0].classList.add("hideMe"));
   };
 
   return (
@@ -41,30 +46,33 @@ function Weekview() {
       </div>
 
       <div className="habit-name-day-container">
-        <div className="habitName-days">
-          <p className="habitName">Dinner at 9 pm</p>
-          <p>{currentDate}</p>
-          <div className="dayNums">
-            {weekDays.map((_, idx) => (
-              <div className="num" key={idx}>
-                <p
-                  onClick={(e) => handleNotDoneClick(e)}
-                  className="not-done-btn"
-                >
-                  &times;
-                </p>
-                <p className="date">{idx}</p>
+        {habitData.map((habit, i) => (
+          <div className="habitName-days" key={habit.id}>
+            <p className="habitName">{habit.habitName}</p>
+            <p>{currentDate}</p>
+            <div className="dayNums" key={i}>
+              {habit.tracker.map((d, idx) => (
+                <div className="num" key={idx}>
+                  <p
+                    onClick={(e) => handleNotDoneClick(e)}
+                    className="not-done-btn"
+                  >
+                    &times;
+                  </p>
 
-                <img
-                  className="done-btn"
-                  src={assets.tick}
-                  alt="done button"
-                  onClick={(e) => handleDoneClick(e)}
-                />
-              </div>
-            ))}
+                  <p className="date">{idx}</p>
+
+                  <img
+                    className="done-btn"
+                    src={assets.tick}
+                    alt="done button"
+                    onClick={(e) => handleDoneClick(e)}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
