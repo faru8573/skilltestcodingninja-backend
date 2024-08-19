@@ -1,0 +1,113 @@
+.weekViewContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.days-holder {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.day-name {
+  width: 37px;
+  /* height: 66px; */
+
+  /* border: 2px solid #78350f; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  position: relative;
+}
+
+.day-name + .day-name::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 100%;
+  background-color: #fff;
+  left: -25px;
+}
+
+.habit-name-day-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.habitName-days {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #e2e8f0;
+  padding: 6px 2px;
+  margin-top: 10px;
+  height: 11em;
+  gap: 1em;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.habitName {
+  font-weight: 700;
+  font-size: 25px;
+}
+
+.date {
+  font-weight: 700;
+}
+
+.dayNums {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.num {
+  width: 50px;
+  height: 50px;
+  border: 2px solid white;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-done-btn {
+  position: absolute;
+  top: -18px;
+  background-color: red;
+  width: 30px;
+  height: 30px;
+  left: 10px;
+  font-size: 21px;
+  color: white;
+  border-radius: 50%;
+  display: block;
+}
+.hideMe .not-done-btn {
+  display: none;
+}
+.done-btn {
+  position: absolute;
+  bottom: -16px;
+  right: 8px;
+  width: 30px;
+}
+
+.hideKordo .done-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .day-name + .day-name::before {
+    left: -10px;
+  }
+}
