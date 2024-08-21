@@ -4,8 +4,8 @@ import { assets } from "../../assets/assets";
 import { useValue } from "../../context/AppContext";
 
 function Weekview() {
-  const a = useValue();
-  console.log(a);
+  const { weekDays, habitData, updateHabit } = useValue();
+
   const currentDate =
     new Date().toLocaleDateString("en-US", {
       month: "2-digit",
@@ -19,20 +19,10 @@ function Weekview() {
       hour12: true,
     });
 
-  // document.querySelector(".not-done-btn").addEventListener("click", (e) => {
-  //   console.log("click kara mujhe");
-  // });
+  const handleDoneClick = (habitId, dayName, status) => {
+    // e.target.parentElement.children[0].classList.add("hideMe");
 
-  const handleNotDoneClick = (e) => {
-    // console.dir(doneRef.current.classList);
-    // doneRef.current.classList.add("hideKordo");
-    console.dir(e.target.parentElement.children[2].classList.add("hideKordo"));
-  };
-
-  const handleDoneClick = (e) => {
-    // console.dir(notDoneRef.current);
-    // notDoneRef.current.classList.add("hideMe");
-    console.dir(e.target.parentElement.children[0].classList.add("hideMe"));
+    updateHabit(habitId, dayName, status);
   };
 
   return (
@@ -46,28 +36,26 @@ function Weekview() {
       </div>
 
       <div className="habit-name-day-container">
-        {habitData.map((habit, i) => (
-          <div className="habitName-days" key={habit.id}>
+        {habitData.map((habit, idx) => (
+          <div className="habitName-days" key={idx}>
             <p className="habitName">{habit.habitName}</p>
             <p>{currentDate}</p>
-            <div className="dayNums" key={i}>
+            <div className="dayNums" key={habit._id}>
               {habit.tracker.map((d, idx) => (
-                <div className="num" key={idx}>
-                  <p
-                    onClick={(e) => handleNotDoneClick(e)}
-                    className="not-done-btn"
-                  >
-                    &times;
-                  </p>
+                <div
+                  className="num"
+                  key={idx}
+                  onClick={(e) => handleDoneClick(habit._id, d.day, "done")}
+                >
+                  <p className="date">{idx + 1}</p>
 
-                  <p className="date">{idx}</p>
-
-                  <img
-                    className="done-btn"
-                    src={assets.tick}
-                    alt="done button"
-                    onClick={(e) => handleDoneClick(e)}
-                  />
+                  {d.status == "done" && (
+                    <img
+                      className="done-btn"
+                      src={assets.tick}
+                      alt="done button"
+                    />
+                  )}
                 </div>
               ))}
             </div>

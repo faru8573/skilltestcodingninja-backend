@@ -1,7 +1,5 @@
 .card {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   padding: 12px;
   min-width: 12em;
   border-radius: 11px;
@@ -10,9 +8,13 @@
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
+.habitTitle {
+  font-weight: 700;
+}
 
 .card:hover {
-  transform: scale(1.1);
+  transform: scale(1.02);
+  background-color: #fecaca;
 }
 
 @media (max-width: 768px) {

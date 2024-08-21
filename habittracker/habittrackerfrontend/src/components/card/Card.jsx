@@ -3,14 +3,16 @@ import "./card.css";
 
 function Card({ habitName, tracker }) {
   const calcTotalCompleted = tracker
-    .map((day) => Object.values(day))
-    .filter((value) => value == "done").length;
+    .map((day) => day.status)
+    .filter((status) => status == "done").length;
 
   return (
     <div className="card">
-      <p>{habitName}</p>
+      <p className="habitTitle">{habitName}</p>
       <p>Completed</p>
-      <p>{calcTotalCompleted}/7</p>
+      <p>
+        {calcTotalCompleted}/{tracker.length}
+      </p>
     </div>
   );
 }
