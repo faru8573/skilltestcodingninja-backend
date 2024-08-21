@@ -33,8 +33,10 @@ export function ContextProvider({ children }) {
   };
 
   const removeHabit = (habitId) => {
-    fetch(BACKEND_URL + "/" + habitId, {
+    fetch(BACKEND_URL, {
       method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: habitId }),
     })
       .then((res) => res.json())
       .then((data) => {

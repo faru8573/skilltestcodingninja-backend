@@ -45,7 +45,7 @@ export class HabitController {
 
   async removeHabit(req, res) {
     try {
-      const { id } = req.params;
+      const { id } = req.body;
       console.log(id, "habitId controller");
       const result = await HabitModel.removeHabit(id);
       if (!result) {

@@ -20,7 +20,7 @@ app.post("/", habitController.addHabit);
 
 app.put("/", habitController.updateHabits);
 
-app.delete("/:id", habitController.removeHabit);
+app.delete("/", habitController.removeHabit);
 
 app.listen(PORT, () => {
   console.log(`server listening on port ${PORT}`);
