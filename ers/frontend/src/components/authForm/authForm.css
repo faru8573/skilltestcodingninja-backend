@@ -1,0 +1,38 @@
+.auth-form-container {
+  max-width: 500px;
+  padding: 1em;
+  display: block;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.199);
+  margin-top: 2em;
+  border-radius: 1em;
+}
+
+.auth-form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.auth-form-container p {
+  color: bisque;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 1em;
+  font-size: 24px;
+}
+.signUp-btn {
+  background-color: #14b8a6;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.toggle-btn {
+  color: bisque;
+}
+
+.toggle-btn span {
+  color: blue;
+  cursor: pointer;
+}

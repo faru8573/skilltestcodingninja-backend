@@ -1,0 +1,14 @@
+.adminpage-container {
+  display: grid;
+  grid-template-columns: repeat(3, 32.35%);
+  gap: 1em;
+  margin-top: 1em;
+}
+
+@media (max-width: 768px) {
+  .adminpage-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1em;
+  }
+}

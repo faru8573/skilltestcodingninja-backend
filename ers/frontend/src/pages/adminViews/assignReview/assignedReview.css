@@ -1,0 +1,12 @@
+.assigned-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
+}
+
+.left-container {
+  border: 1px solid red;
+}
+.right-container {
+  border: 1px solid red;
+}
