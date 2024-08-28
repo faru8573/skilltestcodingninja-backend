@@ -15,7 +15,7 @@ function Home() {
           <Link className="btn" to={"/employee"}>
             I'm an Employee
           </Link>
-          <Link className="btn" to={"/admin"}>
+          <Link className="btn" id="adminBtn" to={"/admin"}>
             I'm an Admin
           </Link>
         </div>

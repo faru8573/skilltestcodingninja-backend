@@ -76,17 +76,31 @@ const Card = ({
                 value={_id}
               />
               <p>Recipient:</p>
-              <select ref={reviewRecipientRef} name="recipient" id="">
+              <select
+                ref={reviewRecipientRef}
+                name="recipient"
+                id=""
+                defaultValue=""
+              >
+                <option value="" disabled>
+                  --please select--
+                </option>
                 {data.map((emp) => (
                   <option key={emp.username} value={emp._id}>
                     {emp.email}
                   </option>
                 ))}
               </select>
-              <button type="button" onClick={() => setShowAssign(null)}>
+              <button
+                className="assignBtns cancelAssign"
+                type="button"
+                onClick={() => setShowAssign(null)}
+              >
                 Cancel
               </button>
-              <button type="submit">Assign</button>
+              <button className="assignBtns submitAssign" type="submit">
+                Assign
+              </button>
             </form>
           </div>
         </div>

@@ -2,20 +2,15 @@ import React, { useState } from "react";
 import "./employeePage.css";
 import { useValue } from "../../../context/AppContext";
 import FeedbackCard from "../../../components/feedbackCard/FeedbackCard";
+import OtherFeedbacks from "../../../components/otherFeedbacks/OtherFeedbacks";
 
 const EmployeePage = () => {
-  const { allReviews, data } = useValue();
-  console.log(allReviews);
+  const { allReviews } = useValue();
+
   const requiringFeedback = allReviews.filter((review) =>
     review.reviewBy.some((rev) => rev.feedback.trim() === "")
   );
 
-  // const reviewBy = data.map((emp) => emp.reviewBy[0].employee).find((id) => id);
-
-  // .filter((rev) => console.log(typeof rev.feedback));
-  // console.log(requiringFeedback);
-
-  const reviewer = allReviews.find((rev) => rev.reviewFor);
   return (
     <div className="employee-page-container">
       <div className="employee-wrapper">
@@ -34,14 +29,11 @@ const EmployeePage = () => {
 
         <div className="existing-feedbacks">
           <p>Feedbacks by others: </p>
-          <ul>
+          <div className="feedbacks-container">
             {allReviews.map((review, idx) => (
-              <li key={idx}>
-                <div>{review.reviewBy[0].feedback}</div>
-                <div>{review.reviewBy[0].feedback}</div>
-              </li>
+              <OtherFeedbacks key={idx} {...review} />
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>

@@ -39,7 +39,14 @@
   border-radius: 8px;
 }
 .btn:hover {
+  background-color: #10b981;
+}
+
+#adminBtn {
   background-color: #f43f5e;
+}
+#adminBtn:hover {
+  background-color: #10b981;
 }
 
 @media (max-width: 768px) {

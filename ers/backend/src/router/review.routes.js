@@ -8,6 +8,6 @@ reviewRouter.get("/", reviewController.getAllReviews);
 reviewRouter.post("/", reviewController.addReview);
 reviewRouter.put("/", reviewController.updateReview);
 
-reviewRouter.post("/feedback", reviewController.addFeedback);
+// reviewRouter.post("/feedback", reviewController.submitFeedback);
 
 export { reviewRouter };

@@ -56,6 +56,30 @@
   gap: 12px;
 }
 
+.assignBtns {
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 3px;
+}
+
+.cancelAssign {
+  background-color: #fca5a5;
+  border: none;
+}
+
+.cancelAssign:hover {
+  background-color: #ef4444;
+}
+.submitAssign {
+  background-color: #86efac;
+  border: none;
+  margin-bottom: 12px;
+}
+
+.submitAssign:hover {
+  background-color: #22c55e;
+}
+
 .updateBtn {
   background-color: #10b981;
   border: none;

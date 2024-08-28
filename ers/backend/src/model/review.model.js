@@ -56,4 +56,6 @@ export class ReviewModel {
       throw new Error("something went wrong");
     }
   }
+
+  static async submitFeedback() {}
 }

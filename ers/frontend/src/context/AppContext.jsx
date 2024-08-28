@@ -31,7 +31,7 @@ export function ContextProvider({ children }) {
   // --- add employee ---
   async function addEmployee(userData) {
     try {
-      const response = await fetch(BACKEND_URL_EMPLOYEE, {
+      const response = await fetch(`${BACKEND_URL_EMPLOYEE}/registration`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -186,8 +186,6 @@ export function ContextProvider({ children }) {
   }, []);
 
   // feedback submit
-
-  async function submitFeedback(feedbackText) {}
 
   return (
     <AppContext.Provider

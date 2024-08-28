@@ -55,5 +55,33 @@ export class UserModel {
     }
   }
 
-  static signIn() {}
+  static async getUserByEmail(email) {
+    try {
+      const result = await Employee.findOne({ email });
+
+      if (!result) {
+        return null;
+      }
+
+      return result;
+    } catch (error) {
+      console.log("error while login user", error);
+      throw new Error("something went wrong");
+    }
+  }
+
+  static async getUserById(id) {
+    try {
+      const user = await Employee.findById(id);
+
+      if (!user) {
+        return null;
+      }
+
+      return user;
+    } catch (error) {
+      console.log("error while login user", error);
+      throw new Error("something went wrong");
+    }
+  }
 }

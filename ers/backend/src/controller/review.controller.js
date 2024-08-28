@@ -45,21 +45,21 @@ export class ReviewController {
     }
   }
 
-  async addFeedback(req, res) {
-    try {
-      const { reviewBy, recipientId, feedbackText } = req.body;
-      const result = await ReviewModel.submitFeedback(
-        reviewBy,
-        recipientId,
-        feedbackText
-      );
-      if (!result) {
-        return res.status(400).send("something went wrong");
-      }
-      res.status(200).send(result);
-    } catch (error) {
-      console.log("error while getting reviews", error);
-      res.status(500).send("something went wrong");
-    }
-  }
+  // async submitFeedback(req, res) {
+  //   try {
+  //     const { reviewBy, recipientId, feedbackText } = req.body;
+  //     const result = await ReviewModel.submitFeedback(
+  //       reviewBy,
+  //       recipientId,
+  //       feedbackText
+  //     );
+  //     if (!result) {
+  //       return res.status(400).send("something went wrong");
+  //     }
+  //     res.status(200).send(result);
+  //   } catch (error) {
+  //     console.log("error while getting reviews", error);
+  //     res.status(500).send("something went wrong");
+  //   }
+  // }
 }
