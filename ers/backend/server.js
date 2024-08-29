@@ -10,7 +10,7 @@ import { userRouter } from "./src/router/user.routes.js";
 import { connectDB } from "./src/config/db.js";
 import { reviewRouter } from "./src/router/review.routes.js";
 import { UserModel } from "./src/model/user.model.js";
-import { authUser } from "./src/middlewares/auth.js";
+import { authUser } from "./src/middlewares/auth.middleware..js";
 const PORT = process.env.PORT;
 
 const app = express();
@@ -25,7 +25,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 60 * 24,
+      maxAge: 1000 * 60 * 60 * 60,
     },
   })
 );

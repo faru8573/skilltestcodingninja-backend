@@ -9,15 +9,19 @@ function Home() {
         <p className="title">Welcome to Employee Review System</p>
         <p className="desc">
           Empowering employees and managers to provide and receive constructive
-          feedback. Choose your role to get started.
+          feedback. Click "Get Started" to begin your journey.
         </p>
+
         <div className="starter-btns">
-          <Link className="btn" to={"/employee"}>
+          <Link id="startBtn" to={"/auth"}>
+            Get Started
+          </Link>
+          {/* <Link className="btn" to={"/employee"}>
             I'm an Employee
           </Link>
           <Link className="btn" id="adminBtn" to={"/admin"}>
             I'm an Admin
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

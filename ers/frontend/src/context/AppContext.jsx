@@ -10,6 +10,8 @@ export const useValue = () => {
 };
 
 export function ContextProvider({ children }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+
   const [allReviews, setAllReviews] = useState([]);
   // ---fetching all employees ----
   const [data, setData] = useState([]);
@@ -199,6 +201,8 @@ export function ContextProvider({ children }) {
         allReviews,
         createReview,
         updateReview,
+        isAuthenticated,
+        setIsAuthenticated,
       }}
     >
       {children}

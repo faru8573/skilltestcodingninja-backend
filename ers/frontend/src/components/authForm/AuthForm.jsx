@@ -3,6 +3,17 @@ import "./authForm.css";
 
 function AuthForm() {
   const [isSignUp, setIsSignUp] = useState(true);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    role: "",
+  });
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -14,28 +25,44 @@ function AuthForm() {
       <form id="auth-form" onSubmit={handleSubmit}>
         {isSignUp && (
           <input
+            onChange={(e) => handleInput(e)}
             type="text"
             name="username"
             id="username"
             placeholder="Username"
             required
+            value={formData.username}
+            autoFocus
           />
         )}
         <input
+          onChange={(e) => handleInput(e)}
           type="email"
           name="email"
           id="email"
           placeholder="Email"
           required
+          value={formData.email}
         />
         <input
+          onChange={(e) => handleInput(e)}
           type="password"
           name="password"
           id="password"
           placeholder="Password"
           required
+          value={formData.password}
         />
-        <select name="role" id="role" required>
+        <select
+          value={formData.role}
+          onChange={(e) => handleInput(e)}
+          name="role"
+          id="role"
+          required
+        >
+          <option value="" disabled>
+            --Select a role--
+          </option>
           <option value="admin">Admin</option>
           <option value="employee">Employee</option>
         </select>

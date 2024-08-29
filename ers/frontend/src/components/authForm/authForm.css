@@ -22,10 +22,13 @@
   font-size: 24px;
 }
 .signUp-btn {
-  background-color: #14b8a6;
+  background-color: #16a34a;
   border: none;
   padding: 4px;
   cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  color: whitesmoke;
 }
 
 .toggle-btn {
@@ -35,4 +38,11 @@
 .toggle-btn span {
   color: blue;
   cursor: pointer;
+}
+
+#auth-form input,
+select {
+  padding: 4px;
+  border-radius: 4px;
+  outline: none;
 }
