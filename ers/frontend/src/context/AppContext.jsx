@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Navigate, useNavigate } from "react-router-dom";
 const AppContext = createContext();
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const BACKEND_URL_EMPLOYEE = `${BACKEND_URL}/api/employee`;
@@ -10,9 +11,78 @@ export const useValue = () => {
 };
 
 export function ContextProvider({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
-
   const [allReviews, setAllReviews] = useState([]);
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(true);
+  const [userRole, setUserRole] = useState(null);
+
+  // const navigate = useNavigate();
+
+  // --------- authenticate user --------
+
+  async function registrationUser(userData) {
+    try {
+      const response = await fetch(`${BACKEND_URL_EMPLOYEE}/registration`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        const user = await response.json();
+        toast.success("Registration is successful! please login now!!");
+        setIsSignUp(false);
+        setUserRole(user.userRole);
+      } else {
+        const error = await response.json();
+        toast.error(error.message);
+      }
+    } catch (error) {
+      console.log("error while registering user", error);
+      toast.error("An error occurred during registration.");
+    }
+  }
+
+  async function loginUser(userData) {
+    try {
+      const response = await fetch(`${BACKEND_URL_EMPLOYEE}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.ok) {
+        toast.success("Login successful!");
+        setIsAuthenticated(true);
+        const findUserRole = data.find(
+          (emp) => emp.email == userData.email
+        ).role;
+
+        setUserRole(findUserRole);
+      }
+    } catch (error) {
+      console.log("error while registering user", error);
+      toast.error("An error occurred during registration.");
+      return null;
+    }
+  }
+
+  async function logOut() {
+    try {
+      const response = await fetch(`${BACKEND_URL_EMPLOYEE}/logout`, {
+        method: "POST",
+      });
+
+      if (response.ok) {
+        Navigate("/");
+      }
+    } catch (error) {
+      console.log("error while log out ", error);
+      toast.error("An error occurred during log out.");
+    }
+  }
+
   // ---fetching all employees ----
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -201,8 +271,13 @@ export function ContextProvider({ children }) {
         allReviews,
         createReview,
         updateReview,
+        registrationUser,
+        isSignUp,
+        loginUser,
+        setIsSignUp,
+        logOut,
         isAuthenticated,
-        setIsAuthenticated,
+        userRole,
       }}
     >
       {children}

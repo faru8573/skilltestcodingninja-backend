@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   createBrowserRouter,
   Navigate,
@@ -12,7 +12,6 @@ import EmployeePage from "./pages/employeeViews/employeePage/EmployeePage";
 import AssignedReview from "./pages/adminViews/assignReview/AssignedReview";
 import Reviews from "./pages/adminViews/reviews/Reviews";
 import AuthenticatePage from "./pages/commonViews/authPage/AuthenticatePage";
-import { useValue } from "./context/AppContext";
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useValue();
@@ -22,60 +21,60 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated ? children : Navigate("/auth");
 };
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navbar />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "/auth", element: <AuthenticatePage /> },
+
+      {
+        path: "/admin",
+        element: (
+          <ProtectedRoute>
+            <AdminPage />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "/add",
+        element: (
+          <ProtectedRoute>
+            <AddEmployee />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/employee",
+        element: (
+          <ProtectedRoute>
+            <EmployeePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/reviews",
+        element: (
+          <ProtectedRoute>
+            <Reviews />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/assign-review",
+        element: (
+          <ProtectedRoute>
+            <AssignedReview />
+          </ProtectedRoute>
+        ),
+      },
+    ],
+  },
+]);
+
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Navbar />,
-      children: [
-        { index: true, element: <Home /> },
-        { path: "/auth", element: <AuthenticatePage /> },
-
-        {
-          path: "/admin",
-          element: (
-            <ProtectedRoute>
-              <AdminPage />
-            </ProtectedRoute>
-          ),
-        },
-
-        {
-          path: "/add",
-          element: (
-            <ProtectedRoute>
-              <AddEmployee />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/employee",
-          element: (
-            <ProtectedRoute>
-              <EmployeePage />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/reviews",
-          element: (
-            <ProtectedRoute>
-              <Reviews />
-            </ProtectedRoute>
-          ),
-        },
-        {
-          path: "/assign-review",
-          element: (
-            <ProtectedRoute>
-              <AssignedReview />
-            </ProtectedRoute>
-          ),
-        },
-      ],
-    },
-  ]);
-
   return <RouterProvider router={router} />;
 }
 

@@ -1,8 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./authForm.css";
+import { useValue } from "../../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
 function AuthForm() {
-  const [isSignUp, setIsSignUp] = useState(true);
+  const {
+    registrationUser,
+    isSignUp,
+    loginUser,
+    setIsSignUp,
+    isAuthenticated,
+    userRole,
+  } = useValue();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (userRole === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/employee");
+      }
+    }
+  }, [isAuthenticated, userRole, navigate]);
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -15,8 +37,21 @@ function AuthForm() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSignUp) {
+      registrationUser(formData);
+    } else {
+      loginUser({ email: formData.email, password: formData.password });
+    }
+
+    setFormData({
+      username: "",
+      email: "",
+      password: "",
+      role: "",
+    });
   };
 
   return (
@@ -53,19 +88,22 @@ function AuthForm() {
           required
           value={formData.password}
         />
-        <select
-          value={formData.role}
-          onChange={(e) => handleInput(e)}
-          name="role"
-          id="role"
-          required
-        >
-          <option value="" disabled>
-            --Select a role--
-          </option>
-          <option value="admin">Admin</option>
-          <option value="employee">Employee</option>
-        </select>
+        {isSignUp && (
+          <select
+            value={formData.role}
+            onChange={(e) => handleInput(e)}
+            name="role"
+            id="role"
+            required
+          >
+            <option value="" disabled>
+              --Select a role--
+            </option>
+            <option value="admin">Admin</option>
+            <option value="employee">Employee</option>
+          </select>
+        )}
+
         <button type="submit" className="signUp-btn">
           {isSignUp ? "Sign up" : "Login"}
         </button>
