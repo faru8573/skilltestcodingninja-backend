@@ -1,25 +1,16 @@
 import React from "react";
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-import Home from "./pages/commonViews/homePage/Home";
-import AdminPage from "./pages/adminViews/adminPage/AdminPage";
-import AddEmployee from "./pages/adminViews/addEmployee/AddEmployee";
-import EmployeePage from "./pages/employeeViews/employeePage/EmployeePage";
-import AssignedReview from "./pages/adminViews/assignReview/AssignedReview";
-import Reviews from "./pages/adminViews/reviews/Reviews";
-import AuthenticatePage from "./pages/commonViews/authPage/AuthenticatePage";
-
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated } = useValue();
-  if (isAuthenticated === null) {
-    return <div>Loading....</div>;
-  }
-  return isAuthenticated ? children : Navigate("/auth");
-};
+import { Outlet } from "react-router-dom";
+import "./app.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import Home from "./pages/home/Home";
+import Admin from "./pages/admin/Admin";
+import Employee from "./pages/employee/Employee";
+import AddEmployeeForm from "./components/forms/AddEmployeeForm";
+import ReviewCard from "./components/review-card/ReviewCard";
+import AddFeedback from "./components/forms/AddFeedback";
+import Profile from "./components/profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -27,55 +18,22 @@ const router = createBrowserRouter([
     element: <Navbar />,
     children: [
       { index: true, element: <Home /> },
-      { path: "/auth", element: <AuthenticatePage /> },
-
-      {
-        path: "/admin",
-        element: (
-          <ProtectedRoute>
-            <AdminPage />
-          </ProtectedRoute>
-        ),
-      },
-
-      {
-        path: "/add",
-        element: (
-          <ProtectedRoute>
-            <AddEmployee />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/employee",
-        element: (
-          <ProtectedRoute>
-            <EmployeePage />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/reviews",
-        element: (
-          <ProtectedRoute>
-            <Reviews />
-          </ProtectedRoute>
-        ),
-      },
-      {
-        path: "/assign-review",
-        element: (
-          <ProtectedRoute>
-            <AssignedReview />
-          </ProtectedRoute>
-        ),
-      },
+      { path: "/admin", element: <Admin /> },
+      { path: "/add", element: <AddEmployeeForm /> },
+      { path: "/reviews", element: <ReviewCard /> },
+      { path: "/employee", element: <Employee /> },
+      { path: "/feedbacks", element: <AddFeedback /> },
+      { path: "/profile", element: <Profile /> },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;

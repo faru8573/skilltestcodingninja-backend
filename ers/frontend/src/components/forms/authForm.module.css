@@ -1,0 +1,25 @@
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.authForm input,
+select {
+  padding: 4px;
+  outline: none;
+  border-radius: 6px;
+  border: none;
+}
+.submitBtn {
+  background-color: #22c55e;
+  border: none;
+  padding: 4px;
+  color: white;
+  border-radius: 6px;
+}
+.toggle {
+  color: blue;
+  cursor: pointer;
+  font-size: small;
+}

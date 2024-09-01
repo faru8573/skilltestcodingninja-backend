@@ -1,50 +1,74 @@
-import React from "react";
-import { Link, Outlet } from "react-router-dom";
-import "./navbar.css";
-import toast, { Toaster } from "react-hot-toast";
-function Navbar() {
-  return (
-    <div className="container">
-      <Toaster position="top-center" reverseOrder={false} />
-      <header>
-        <Link to="/">
-          <h1 className="logo">
-            ERS<span className="red-dot">.</span>
-          </h1>
-        </Link>
+import React, { useState } from "react";
+import styles from "./navbar.module.css";
+import { NavLink, Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
-        <nav>
-          <div className="nav-links">
-            <ul>
-              <li>
-                <Link className="link" to={"/"}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link className="link" to={"/reviews"}>
+function Navbar() {
+  const [isAdmin, setIsAdmin] = useState(true);
+
+  return (
+    <>
+      <Toaster position="top-center" reverseOrder={false} />
+      <header className={styles.headerContainer}>
+        <div className={styles.container}>
+          <h1>
+            ERS<span className={styles.dot}>.</span>
+          </h1>
+
+          <nav className={styles.navLinks}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.activeLink : styles.inactiveLink
+              }
+              to={"/"}
+            >
+              Home
+            </NavLink>
+            {isAdmin ? (
+              <>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? styles.activeLink : styles.inactiveLink
+                  }
+                  to={"/add"}
+                >
+                  Add Employee
+                </NavLink>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? styles.activeLink : styles.inactiveLink
+                  }
+                  to={"/reviews"}
+                >
                   Reviews
-                </Link>
-              </li>
-              <li>
-                <Link className="link" to={"/add"}>
-                  Add employee
-                </Link>
-              </li>
-              <li>
-                <Link className="link" to={"/"}>
-                  Sign in
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+                </NavLink>
+              </>
+            ) : (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? styles.activeLink : styles.inactiveLink
+                }
+                to={"/feedbacks"}
+              >
+                Feedback
+              </NavLink>
+            )}
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles.activeLink : styles.inactiveLink
+              }
+              to={"/profile"}
+            >
+              Profile
+            </NavLink>
+          </nav>
+        </div>
       </header>
 
-      <div className="header-main-container">
+      <main className={styles.mainContainer}>
         <Outlet />
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
 

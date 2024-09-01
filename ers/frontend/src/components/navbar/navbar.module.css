@@ -1,0 +1,47 @@
+.headerContainer {
+  background-color: #06b5d4;
+  padding: 5px 1em;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  position: sticky;
+  top: 0;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1024px;
+  margin: auto;
+}
+.container h1 {
+  color: #fecdd3;
+}
+.dot {
+  color: #e11d48;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1em;
+}
+.link {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  list-style: none;
+  text-decoration: none;
+}
+
+.activeLink {
+  text-decoration: none;
+  color: green;
+}
+
+.inactiveLink {
+  text-decoration: none;
+  color: blue;
+}
+
+.mainContainer {
+  max-width: 1024px;
+  margin: auto;
+}
